@@ -30,6 +30,8 @@ export function therapyPaths(root) {
     safetyProtocol: join(r, '.therapy', 'safety-protocol.md'),
     commands: join(r, '.therapy', 'commands.md'),
     profileProtocol: join(r, '.therapy', 'profile-protocol.md'),
+    arcReview: join(r, '.therapy', 'arc-review.md'),
+    arcLog: join(r, 'arc.md'),
     persona: join(r, '.therapy', 'persona.md'),
     sessionStructure: join(r, '.therapy', 'session-structure.md'),
     modalitiesDir: join(r, '.therapy', 'modalities'),

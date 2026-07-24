@@ -1,14 +1,15 @@
-<!-- version: 1.6.0 -->
+<!-- version: 1.7.0 -->
 # Customization Commands
 
 The client can request changes to their therapy setup during a session. All customization files are stored locally in `.therapy/library/`.
 
 ## Always-on protocol pointer
 
-This file is read at every session start. It carries one standing pointer (not an on-request command) so the behavior reaches installs whose root `CLAUDE.md` predates the feature:
+This file is read at every session start. It carries standing pointers (not on-request commands) so the behavior reaches installs whose root `CLAUDE.md` predates the feature:
 
 - **Profile provenance.** At session start and session end, follow `.therapy/profile-protocol.md` — date current-state profile writes `*(YYYY-MM-DD)*`, and offer a profile review when current-state content has gone stale (that file holds the exact staleness threshold and the offer discipline). If `.therapy/profile-protocol.md` isn't present, skip this — a pre-feature install; degrade gracefully.
 - **Usage-pattern reflection.** At session start, follow `.therapy/usage-reflection.md` — how to hold the mechanical usage-cadence facts the SessionStart hook may inject (raise gently, at most once, at a lull; respect a decline marker durably; it is never a crisis screen — heavy use plus crisis routes to `.therapy/safety-protocol.md`). If `.therapy/usage-reflection.md` isn't present, skip — a pre-feature install; degrade gracefully.
+- **Arc reviews.** At session start, follow `.therapy/arc-review.md` — offer a periodic zoom-out review when `arc.md`'s most recent entry has aged past the file's stated threshold, never during crisis or acute grief. If `.therapy/arc-review.md` isn't present, skip — a pre-feature install; degrade gracefully.
 
 ## Natural Language Recognition
 
@@ -42,6 +43,10 @@ Recognize conversational requests, not just exact command phrases:
 **For profile review** (triggers the profile provenance walk-through):
 - "review my profile", "check my profile", "go over what you have about me"
 - "are your notes about me still accurate?", "update your notes on me"
+
+**For an early arc review** (triggers a zoom-out review ahead of the normal 14-day offer):
+- "let's zoom out", "can we step back and look at the bigger picture"
+- "how do you think things are going overall", "let's do an arc review"
 
 ## When persona change is triggered
 
@@ -159,6 +164,14 @@ The client-initiated version of the profile provenance walk-through (see `.thera
 4. Never fabricate a date for undated legacy content — a date is a promise it was confirmed live. It earns its date the moment the client confirms it here.
 5. Keep it light and optional. If the client would rather not, that's fine — drop it and move on.
 
+## When client asks for an early arc review
+
+The client-initiated version of the periodic zoom-out (see `.therapy/arc-review.md`). Available any time, regardless of whether the 14-day threshold has been hit — the same discipline as an on-demand profile review.
+
+1. Confirm it's not crisis or acute grief right now — if it is, gently defer: "Let's come back to the bigger picture another time — right now let's stay with this."
+2. Otherwise, run the review exactly as `.therapy/arc-review.md` describes: the five headings, evidence from session notes rather than impression, the collusion guard.
+3. Write the dated entry to `arc.md` afterward as normal — this resets the 14-day clock the same as a review that fired on schedule.
+
 ## Help & Discoverability
 
 When client asks "what can you do?", "help", or "what can I customize?" (in non-crisis context):
@@ -167,6 +180,7 @@ When client asks "what can you do?", "help", or "what can I customize?" (in non-
 > - Import notes from other tools (ChatGPT exports, journals, etc.)
 > - Build a context library from our past sessions (the people, places, and recurring themes in your life)
 > - Review my notes about you to make sure they're still accurate
+> - Step back for a bigger-picture check-in on how things are going overall
 > - Adjust my communication style (more direct, warmer, etc.)
 > - Add or remove therapeutic approaches (CBT, somatic work, etc.)
 > - Change session structure (more/less homework)

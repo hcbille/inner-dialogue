@@ -1,5 +1,5 @@
 {
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Inner Dialogue updatable components",
   "base_url": "https://raw.githubusercontent.com/ataglianetti/inner-dialogue/main/",
   "components": {
@@ -38,6 +38,12 @@
       "target": ".therapy/usage-reflection.md",
       "required": true,
       "description": "Therapist guidance for holding injected usage data (raise once, gently; not a crisis screen)."
+    },
+    "arc-review": {
+      "file": "arc-review.md",
+      "target": ".therapy/arc-review.md",
+      "required": true,
+      "description": "Periodic (~14-day) zoom-out review protocol: progress/stuck/held-but-unexamined/life-outside-sessions/direction, logged to arc.md. Includes the collusion guard and the standing-threads-check that keeps findings alive between reviews."
     },
     "claude-settings": {
       "file": "claude-settings.template.json",

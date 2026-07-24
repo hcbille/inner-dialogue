@@ -10,6 +10,7 @@ const SINGLE_FILES = [
   { source: 'hooks/safety-net.js', target: '.therapy/hooks/safety-net.js' },
   { source: 'hooks/usage-stats.js', target: '.therapy/hooks/usage-stats.js' },
   { source: 'usage-reflection.md', target: '.therapy/usage-reflection.md' },
+  { source: 'arc-review.md', target: '.therapy/arc-review.md' },
 ];
 
 const LIBRARY_DIRS = [

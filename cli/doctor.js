@@ -323,6 +323,18 @@ export async function doctor(opts) {
     );
   }
 
+  // Arc-review presence. Warning (not error) severity, same reasoning as
+  // profile-protocol above: pre-feature installs must keep validating clean.
+  // arc.md itself is not checked here — like profile.md, it's client-authored
+  // content created the first time a review actually runs, not a shipped file.
+  if (existsSync(paths.arcReview)) {
+    ok.push('.therapy/arc-review.md present');
+  } else {
+    warnings.push(
+      'arc-review.md missing (.therapy/arc-review.md) — the periodic zoom-out review (progress/stuck/held-but-unexamined/life-outside-sessions/direction) is not installed. Run `inner-dialogue update` to install it.'
+    );
+  }
+
   if (existsSync(paths.context)) {
     ok.push('context/ folder present');
     if (!existsSync(paths.contextIndex)) {

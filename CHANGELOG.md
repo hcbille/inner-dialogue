@@ -6,6 +6,18 @@ All notable changes to Inner Dialogue.
 
 ## [Unreleased]
 
+### Added
+- **Arc reviews — a periodic zoom-out that catches drift session-by-session continuity can't see.** Addresses #16. Roughly every 14 days, the therapist offers a review checking the work against the client's own stated goal across five headings: Progress, Stuck, **Held but unexamined** (a "collusion guard" naming what the therapist has been quietly avoiding pushing on — a failure mode a warm, agreeable persona is otherwise structurally blind to), Life outside sessions, and Direction. Findings are logged to a new dated `arc.md` (newest entry first). Between reviews, the most recent entry's "Held but unexamined" list feeds a **standing-threads check** at every session start (alongside the existing "Threads to Revisit" scan): an item carried more than 7 days without being addressed is named gently, once, at a natural moment — never during crisis, never more than one per session. New framework file `arc-review.md` → `.therapy/arc-review.md`, referenced (not duplicated) by `CLAUDE.template.md` and `commands.md`, following the same pattern as `profile-protocol.md`. A `let's zoom out` / `let's do an arc review` command triggers the same review on demand, same discipline as the on-demand profile review. `CLAUDE.template.md 1.3.0 → 1.4.0`, `commands.md 1.6.0 → 1.7.0`, `manifest.json 1.5.0 → 1.6.0`.
+- **`doctor` checks for the arc-review file.** Warns (not errors) when `.therapy/arc-review.md` is absent, so pre-feature installs keep validating clean until they run `update`.
+
+### For Existing Users
+Run `npx inner-dialogue@latest update --path <your-folder>` to receive `arc-review.md`. Nothing is logged retroactively — `arc.md` starts empty and the 14-day clock begins from your next session. Existing `Threads to Revisit` sections in past session notes are unaffected; the standing-threads check only reads forward from the first arc review.
+
+### Not yet done (tracked for follow-up before this is merge-ready)
+- No `evals/` coverage or `cli/__tests__` unit tests for the new doctor check yet — this PR is a working preview of the shape, not a finished submission.
+- `evals/fixture/CLAUDE.md` (the eval harness's own copy) hasn't been synced with the `CLAUDE.template.md` changes.
+- Two smaller, related ideas were deliberately left out of scope for this PR and would be separate follow-ups if there's interest: a "maintainer mode" persona-exit command for direct system debugging, and a context-file/`profile.md` length-consolidation maintenance pass riding the same 14-day cadence.
+
 ---
 
 ## [2.9.0] - 2026-07-15
